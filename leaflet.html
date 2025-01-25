@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Cleaners Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        #map { height: 1000px; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([40.74310657565007, -73.97166378158964], 12);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var locations = [
+  {
+    "name": "Jack's Wife Freda (Lafayette)",
+    "coords": [40.723408, -73.997685],
+    "address": "226 Lafayette St, New York, NY 10012",
+    "phone": "(212) 510-8550",
+    "website": "https://www.jackswifefreda.com/"
+  },
+  {
+    "name": "Jack's Wife Freda (Carmine)",
+    "coords": [40.731234, -74.001435],
+    "address": "50 Carmine St, New York, NY 10014" 
+  },
+  {
+    "name": "Jack's Wife Freda (University)",
+    "coords": [40.733455, -73.995056],
+    "address": "72 University Pl, New York, NY 10003"
+  },
+  {
+    "name": "Jack's Wife Freda (8th Ave)",
+    "coords": [40.743974, -74.000865],
+    "address": "116 8th Ave, New York, NY 10011"
+  },
+  {
+    "name": "Jack's Wife Freda (Wythe)",
+    "coords": [40.715987, -73.956235],
+    "address": "258 Wythe Ave, Brooklyn, NY 11249"
+  },
+  {
+    "name": "Arte Cafe",
+    "coords": [40.775614, -73.980816],
+    "address": "106 W 73rd St, New York, NY 10023" 
+  },
+  {
+    "name": "El Coco (73rd St)",
+    "coords": [40.775702, -73.980803],
+    "address": "104 W 73rd St #1, New York, NY 10023" 
+  },
+  {
+    "name": "El Coco (Hell's Kitchen)",
+    "coords": [40.762352, -73.993915],
+    "address": "828 9th Ave 4th floor, New York, NY 10019" 
+  },
+  {
+    "name": "Sicily Osteria",
+    "coords": [40.757353, -73.988159],
+    "address": "328-330 W 46th St, New York, NY 10036" 
+  },
+  {
+    "name": "Bocca di Bacco (Hell's Kitchen)",
+    "coords": [40.764438, -73.993906],
+    "address": "836 9th Ave, New York, NY 10019" 
+  },
+  {
+    "name": "Bocca di Bacco (Theater District)",
+    "coords": [40.758298, -73.988082],
+    "address": "635 9th Ave, New York, NY 10036" 
+  },
+  {
+    "name": "Bocca di Bacco (Chelsea)",
+    "coords": [40.745369, -74.000869],
+    "address": "169 9th Ave, New York, NY 10011" 
+  },
+  {
+    "name": "Jajaja Mexicana (Kent Ave)",
+    "coords": [40.707221, -73.959408],
+    "address": "119 Kent Ave, Brooklyn, NY 11249" 
+  },
+  {
+    "name": "Jajaja Mexicana (Carmine)",
+    "coords": [40.73132, -74.00163],
+    "address": "63 Carmine St, New York, NY 10014" 
+  },
+  {
+    "name": "Gelso & Grand",
+    "coords": [40.722062, -73.996599],
+    "address": "186 Grand St, New York, NY 10013" 
+  },
+  {
+    "name": "Brooklyn Bagel & Coffee Company (Chelsea)",
+    "coords": [40.743996, -74.00089],
+    "address": "286 8th Ave, New York, NY 10001" 
+  },
+  {
+    "name": "Brooklyn Bagel & Coffee Company (8th Street)",
+    "coords": [40.730676, -73.991904],
+    "address": "63 E 8th St, New York, NY 10003" 
+  },
+  {
+    "name": "Brooklyn Bagel & Coffee Company (Westchester)",
+    "coords": [33.943389, -118.391166], 
+    "address": "Location in Westchester, CA" 
+  },
+  {
+    "name": "Llama San",
+    "coords": [40.741218, -74.00142],
+    "address": "359 6th Ave, New York, NY 10014" 
+  },
+  {
+    "name": "Llama Inn",
+    "coords": [40.701948, -73.959118],
+    "address": "50 Withers St, Brooklyn, NY 11211" 
+  },
+  {
+    "name": "Anything At All",
+    "coords": [40.768552, -73.94884],
+    "address": "22 N Loop Rd, New York, NY 10044" 
+  },
+  {
+    "name": "Panorama Room",
+    "coords": [40.768552, -73.94884],
+    "address": "22 N Loop Rd, New York, NY 10044" 
+  },
+  {
+    "name": "Fabrique Bakery (14th Street)",
+    "coords": [40.738769, -74.000163],
+    "address": "348 W 14th St, New York, NY 10014" 
+  },
+  {
+    "name": "Fabrique Bakery (550 5th Ave)",
+    "coords": [40.754417, -73.981117],
+    "address": "550 5th Ave, New York, NY 10036" 
+  },
+  {
+    "name": "Jarana",
+    "coords": [40.811701, -74.054564],
+    "address": "Location in New Jersey" 
+  },
+  {
+    "name": "MrBeast Burger",
+    "coords": [40.757662, -73.987985],
+    "address": "Multiple Locations" 
+  },
+  {
+    "name": "Paramount Club",
+    "coords": [40.754535, -73.987428],
+    "address": "1301 6th Ave, New York, NY 10019" 
+  },
+  {
+    "name": "Planet Hollywood (42nd Street)",
+    "coords": [40.756969, -73.985735],
+    "address": "136 W 42nd St, New York, NY 10036" 
+  },
+  {
+    "name": "Sylvia's Restaurant",
+    "coords": [40.803455, -73.947],
+    "address": "328 Malcolm X Blvd, New York, NY 10027"
+  }
+]
+
+locations.forEach(function(location) {
+    let popupContent = `<b>${location.name}</b><br>`;
+    if (location.address) {
+        popupContent += `<i>Address:</i> ${location.address}<br>`;
+    }
+    if (location.phone) {
+        popupContent += `<i>Phone:</i> ${location.phone}<br>`;
+    }
+    if (location.website) {
+        popupContent += `<i>Website:</i> <a href="${location.website}">${location.website}</a><br>`;
+    }
+    // Add other information if available (hours, description, image, etc.)
+    L.marker(location.coords).addTo(map)
+        .bindPopup(popupContent);
+});
+
+    </script>
+</body>
+</html>
